@@ -3,4 +3,5 @@ export class UpdateProductDto {
   brand?: string;
   price?: number;
   stock?: number;
+  image?: string;
 }

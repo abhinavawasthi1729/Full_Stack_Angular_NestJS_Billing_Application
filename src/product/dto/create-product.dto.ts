@@ -3,4 +3,5 @@ export class CreateProductDto {
   brand: string;
   price: number;
   stock: number;
+  image: string;
 }

@@ -16,4 +16,7 @@ export class Product {
 
   @Column()
   stock: number;
+
+  @Column({ nullable: true }) 
+  image: string;
 }

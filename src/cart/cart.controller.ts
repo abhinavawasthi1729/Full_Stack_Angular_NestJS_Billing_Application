@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Param, Delete, Put } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, Delete, Put, ParseIntPipe } from '@nestjs/common';
 import { CartService } from './cart.service';
 import { AddToCartDto } from './dto/add-to-cart.dto';
 import { UpdateCartItemDto } from './dto/update-cart-item.dto';
@@ -9,7 +9,7 @@ export class CartController {
 
   @Post()
   addToCart(@Body() dto: AddToCartDto) {
-    return this.cartService.addToCart(dto);
+    return this.cartService.addOrUpdate(dto);
   }
 
   @Get()
@@ -17,10 +17,21 @@ export class CartController {
     return this.cartService.findAll();
   }
 
-  @Put(':id')
-  updateItem(@Param('id') id: string, @Body() dto: UpdateCartItemDto) {
-    return this.cartService.updateQuantity(+id, dto.quantity);
-  }
+  // @Put(':id')
+  // updateItem(@Param('id') id: string, @Body() dto: UpdateCartItemDto) {
+  //   return this.cartService.updateQuantity(+id, dto.quantity);
+  // }
+
+  // cart.controller.ts
+// @Put(':cartId/product/:productId')
+// updateItemQuantity(
+//   @Param('cartId', ParseIntPipe) cartId: number,
+//   @Param('productId', ParseIntPipe) productId: number,
+//   @Body() dto: UpdateCartItemDto
+// ) {
+//   return this.cartService.addOrUpdate(productId, dto.quantity);
+// }
+
 
   @Delete(':id')
   removeItem(@Param('id') id: string) {
@@ -31,4 +42,6 @@ export class CartController {
   clearCart() {
     return this.cartService.clearCart();
   }
+
+  
 }
